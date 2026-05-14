@@ -12,26 +12,42 @@ function LogCard(props) {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        rowGap: 4,
+        width: "100%",
+        border: "1px solid #e5e7eb",
+        borderRadius: 8,
+        overflow: "hidden",
+        fontSize: 12,
       }}
     >
+      {/* Header */}
       <div
         style={{
-          display: "flex",
-          marginBottom: 4,
-          fontSize: 16,
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr 1fr",
+          background: "#f8fafc",
           fontWeight: "bold",
+          borderBottom: "1px solid #e5e7eb",
         }}
       >
-        <span style={{ flex: 1 }}>Passenger Name</span>
-        <span style={{ flex: 1 }}>Airport</span>
-        <span style={{ flex: 1 }}>Timestamp</span>
-        <span style={{ flex: 1 }}>Type</span>
+        <div style={{ padding: "10px 12px" }}>Passenger Name</div>
+        <div style={{ padding: "10px 12px" }}>Airport</div>
+        <div style={{ padding: "10px 12px" }}>Timestamp</div>
+        <div style={{ padding: "10px 12px" }}>Type</div>
       </div>
-      {logs.map((item) => (
-        <LogItem key={`${item.passengerName}`} item={item}></LogItem>
+
+      {/* Rows */}
+      {logs.map((item, index) => (
+        <div
+          key={`${item.passengerName}-${item.type}-${index}`}
+          style={{
+            borderBottom:
+              index !== logs.length - 1
+                ? "1px solid #e5e7eb"
+                : "none",
+          }}
+        >
+          <LogItem item={item} />
+        </div>
       ))}
     </div>
   );
